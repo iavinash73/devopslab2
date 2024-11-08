@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker image..."
-                    def dockerImage = docker.build("${DOCKER_USERNAME}/demo-app:${env.BUILD_NUMBER}") // Build the Docker image
+                    def dockerImage = docker.build("${DOCKER_USERNAME}/another-app:${env.BUILD_NUMBER}") // Build the Docker image
                 }
             }
         }
@@ -55,8 +55,8 @@ pipeline {
                 script {
                     echo "Pushing Docker image to Docker Hub..."
                     docker.withRegistry('https://registry.hub.docker.com', DOCKER_CREDENTIALS_ID) {
-                        docker.image("${DOCKER_USERNAME}/demo-app:${env.BUILD_NUMBER}").push() // Push the image to Docker Hub
-                        docker.image("${DOCKER_USERNAME}/demo-app:${env.BUILD_NUMBER}").push("latest") // Optionally push as latest
+                        docker.image("${DOCKER_USERNAME}/another-app:${env.BUILD_NUMBER}").push() // Push the image to Docker Hub
+                        docker.image("${DOCKER_USERNAME}/another-app:${env.BUILD_NUMBER}").push("latest") // Optionally push as latest
                     }
                 }
             }
